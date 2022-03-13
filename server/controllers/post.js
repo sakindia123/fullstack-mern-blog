@@ -7,7 +7,7 @@ export const createPost = async (req, res) => {
     let post = new postModel(req.body)
     try {
         await post.save()
-        res.status(200).res('blog post saved!')
+        res.status(200).json('blog post saved!')
     } catch (err) {
         res.status(500).json({ error: err.message })
     }
@@ -41,7 +41,7 @@ export const getPost = async (req, res) => {
 export const updatePost = async (req, res) => {
     try {
         await postModel.findByIdAndUpdate(req.params.id, { $set: req.body })
-        res.status(200).res('Post updated!')
+        res.status(200).json('Post updated!')
     } catch (err) {
         res.status(500).json({ error: err.message })
     }
@@ -51,7 +51,7 @@ export const deleteBlog = async (req, res) => {
     const id = req.params.id
     try {
         await postModel.findByIdAndRemove(id).exec()
-        res.status(200).res('Deleted!')
+        res.status(200).json('Deleted!')
     } catch (err) {
         res.status(500).json({ error: err.message })
     }
